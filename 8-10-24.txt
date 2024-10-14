@@ -1,0 +1,30 @@
+Create a stored procedure to calculate area and circumference of Circle given input as raduis value;
+ 
+	area= (3.14) * radius * radius
+	circumference= 2 * (3.14) * radius
+ 
+	Declare Stored Procedure
+	DELIMITER //
+	CREATE  PROCEDURE calculate_circle_properties(
+	IN radius DECIMAL (10,2),
+	OUT area DECIMAL (10,2),
+	OUT circumference DECIMAL (10,2) )
+	BEGIN
+		SET area= PI() * POWER(radius, 2);
+		SET circumference= 2 * PI()* radius;
+	END//
+ 
+ 
+	DELIMITER;
+ 
+ 
+	Invoke Stored Procedure
+	 SET @area=0;
+	 SET @circumference=0;
+
+	CALL calculate_circle_properties(6, @area, @circumference);
+ 
+	SELECT  @area  AS Area,  @circumference AS Circumference;
+ 
+ 
+ 

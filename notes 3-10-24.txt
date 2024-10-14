@@ -1,0 +1,266 @@
+IT Profession:
+
+IT Solution:
+	Derive more value from their  existing data
+	Help organizations become more customer-centric
+
+	Software Engineering:
+
+	 Application Development, Application Testing (Software Testing), Application Operations Management (Dev Ops)
+		logic in IT solutions ensures that 
+		systems operate consistently,
+	        predictably, 
+		and efficiently,
+		aligning with the intended objectives of 
+		the software and 
+		its users.
+		Logic:
+			data structure
+			algorithm (automated process)
+			conditions
+			Bussiness rules
+			compliances
+		UI  Logic---presentation--laytout,frame, web pages, routing
+					--components,
+					--DOM manipulation
+		Bussiness Logic---
+				  searching, sorted, 
+				  product catalog, inventory,
+				  shopping cart,
+				  order process,
+				  shipment, Customer relationship mgmt
+	      + Data Access Logic----
+				External data Access  (rest api,  web sockets, device interfacing)
+				Internal data Access
+						data mapping, 
+						data filtering,
+						CRUD Operations,
+						Analytical data access
+						
+
+	 Big Data: PG DBDA
+		 Data Scientist, Data Engineer, Data Alaytics, 
+		 
+
+		  V  :Volume
+		  V  :Velocity
+		  V  :variety
+		  V  :Veracity
+		  V  :Value
+
+
+	Data:
+		Databse Administrator (DBA),
+		Database Developer
+		System Administrator		  
+
+	Automated Readymade Softwares for 
+		EDP (Electronic Data Processing) Department
+	
+	Databse: used and managed by  Database Team ( backend Team)
+		 Data Engineer, Data Scientist, Data Administrator, Data Analytics,
+		 BI Developer,  data miner,  Datawarehouse engineer, etc.
+		
+		1994:DBase
+		1995: Visual Foxpro
+		199:  Microsoft Access
+		2000:Microsoft SQL Server, Oracle,  mySql
+		
+		1.Data Organization:
+		Databases structure data in a way that makes it easy to manage, retrieve, and update. 
+		This organization can take various forms, such as tables, documents, or key-value pairs.
+			
+		2.Data Management:
+		Databases use a Relational Database Management System (RDBMS) 
+		  to handle data operations like 
+		  creation, reading, updating, and deletion (CRUD). 
+
+		3.Data Integrity:
+		Databases enforce rules to ensure the accuracy and consistency of the data. 
+		This includes constraints like 
+			primary keys, foreign keys, and validation rules.
+
+
+		4.Data Relationship:
+			 Databases can define relationships between different data entities, 
+			  allowing for complex queries and analytics. 
+		
+		5.Scalability:
+			Databases are designed to handle large volumes of data and 
+                                  can scale as needed,
+                                  whether by increasing hardware resources or optimizing queries.
+
+		6.Accessibility:
+			 Databases can be accessed by multiple users and applications simultaneously, 
+			 supporting collaboration and data sharing.
+
+		7.Security:
+			Databases implement security measures to protect sensitive data, such as 
+			user authentication, encryption, and access controls.
+
+
+
+Data Storage: (Data Persistence)
+
+			Data is always preserved in Memory:
+	
+					
+			1.Primary Memory:RAM (Random Access Memory)
+			2.Secondary Memory: Hard disk Drive  (SD, SSD)
+			File Management system:
+				(NTFS)
+				  Data is stored in form of  files and folders
+
+	DBMS:
+		A DBMS is a software system that enables 
+			the creation, management, and manipulation of databases. 	
+		DBMS can store data in various formats, including 
+			hierarchical, 
+			network, or 
+			flat file structures. 
+		Normalization (organizing data to reduce redundancy) 
+			is not a requirement in all DBMS systems.
+
+		Examples of DBMS include file systems, 
+					XML databases, 
+					and object-oriented databases.
+
+	RDBMS:  (Relational Database management System)
+		An RDBMS is a type of DBMS that organizes data into 
+			tables (or relations) that can be linked by common data attributes.
+		 It uses a structured query language (SQL) for data manipulation.
+
+		Data is stored in tables, 
+		where each row represents a record and each column represents a field. 
+		RDBMS emphasizes normalization to minimize redundancy and maintain data integrity.
+
+		ACID Properties:
+			ensuring reliable transactions and data integrity using ACID properties
+			A: Automicity
+			C: Consistency
+			I: Isolation
+			D: Durability
+
+		Popular RDBMS examples include MySQL, 
+					PostgreSQL,
+					Oracle Database, and 
+					Microsoft SQL Server.
+
+
+		employees (Table)
+		id: primary key
+		
+		id	firstname	lastname	email	 			location  ---------Fields
+	Records
+	Row	1	Smita		Patil		s.p@gmail.com			Manchar		
+		2	Yash		Gawade		yash.g@gmail.com		Rajguru nagar
+		3	Ravi		Tambade		ravi.tambade@gmail.com		Pune
+		 
+		departments (Table)
+		deptid: primary key
+		head: foreign Key
+
+		deptid	title		location	head---------------------------Fields
+	Records 12	Accounts	Pune		2
+		13	Marketing	Mumbai		3
+
+
+
+	SQL :Structured Query Language:It uses a structured query language (SQL) for data manipulation.
+
+	Learning Database Commands:
+
+	DDL:Data Definiation Language Commands
+						CREATE TABLE
+						ALTER TABLE
+						DROP TABLE
+	DML:Data Manipulation Language Commands
+						INSERT INTO
+						UPDATE 
+						DELETE
+				
+				
+	SQL:Structured Query Language Commands:
+						SELECT * from ecommerce.products
+
+
+	DCL:Data Control Language Commands:
+		DCL commands in MySQL typically require administrative privileges to execute.
+				GRANT, REVOKE, 
+				
+
+	Software  	+  Data
+			   Information
+	(Application)	   (Knwoledge)
+			   (Intelligence)
+			   (Insight)
+			   (Vision)
+
+
+-----------------------------------------------------------------------------------------------------
+
+What is the real meaning of 
+AI,Data Science, Data Engineering, Database Administration ?
+
+0.AI (Artificial Intelligence)
+     Focus: Developing systems that can perform tasks typically require
+		humain intelligence  such as,
+		understanding natural language,
+		recognizing patterns,
+		make deceisions
+
+     activities:
+		Creating algorithms and models that enable machines to learn from data.
+		Implementing machine learning, deep learning, and natural language processing techniques.
+		Developing intelligent applications (like chatbots or recommendation systems).
+		
+     skills:
+		Machine learning Frameworks (TensorFlow or PyTorch), statistical analysis,
+		Programming knowledge of Python, R
+		Domain expertise
+
+
+1.Data Science:
+	Focus:
+		 extract intelligence, knowledge  from data using 
+		 statistical methods, alogoritms and 
+		 compuratized mechanism (Machine learning) for extracting information
+	activities:
+		Analyzing data to identify trends and patterns.
+		Building predictive models and algorithms.
+		Communicating findings through visualizations and reports.
+		
+	Skills:
+		statistics, Programming Python or R,
+		machine learning,data Visualization tool ( Tableau, matplotlib)
+		Domain knowledge  ??????		
+
+
+
+2.Data Engineering:
+	Focus:Designing, building and maintaining the infrastructure and their architecture
+		for data collection, storage  and processing
+	Key activities:
+		Creating data pipelines to ensure data flows from various sources to storage systems.
+		Optimizing databases for performance and scalability.
+		Ensuring data quality and integrity.
+	Skills:
+		programming languages ( python, java, scala)
+		ETL (Extract, Transform, Load) (Datawarehousing)
+		SQL, NoSQL
+		big data technologies (Hadoop or Spark, Hive, etc.)
+
+
+3.Database Administration:
+	Focus:
+		Managing  and maintaining databases
+			 to ensure they are operational, secure as well as performing well
+
+	Key activities:
+		Installing, configuring, and upgrading database management systems.
+		Monitoring database performance and implementing optimizations.
+		Managing backups, security, and user access.
+	
+	Skills:SQL,
+	       Database management systems (oracle, mysql, microsoft SQL server)
+	       Performance tunning, security protocols

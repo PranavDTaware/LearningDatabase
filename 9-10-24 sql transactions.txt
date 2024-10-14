@@ -1,0 +1,101 @@
+Write stored procedure fundstransfer  (IN fromacctid, IN toaccoutid, IN amount)
+ 
+Begin
+start transaction
+ 
+ 
+commit;
+ 
+End
+ 
+Funds Transfer Transaction
+		from 12		to 13		6000
+ 
+Demo:
+	Create database banking
+	Create accounts table
+		acctid, holder, balance
+		12	sameer	1000
+		13	raj	15800
+		67	seeta	9800
+	Create operations table
+		operationid  acctid datetime		amount	operation type
+		1	     12	     9/10/2024 11:00    300      D	
+		2	     12	     9/10/2024 11:00    6000     w	
+		3	     13	     9/10/2024 11:00    6000     D	
+Steps:
+	1.Create Bankingdb database
+	2.Use Bankingdb
+	3.Create Accounts table with fields and primary key , autoincrement
+	4.Create Operations table with fields using primary key, foreign key and other fields
+	5.Insert sample data in accounts table with three to four recrods with different balances.
+	6.Create Stored procedure spfundstranser into Bankingdb
+	7.Define IN parameters for storedprocedure  fromaccountid, toaccountid, amount
+	8.Define transaction block inside stored procedure
+	9.
+		Add logic for adding two entires in operations table for  withdraw from fromaccountid , deposit into toaccountid
+		Update balance for both accountid's into accounts table.
+	10. commit transaction .
+	11.test stored procedute by invoking with passing parameters  fromaccount, toaccountid, amount
+	12.verify result by browing tables data.
+
+
+
+
+
+
+
+
+use banking;
+create table accounts(
+	accountid int auto_increment primary key,
+    holder varchar(50) not null,
+    balance Decimal(10,3) not null
+    );
+
+insert into accounts( accountid, holder, balance) values
+(12,'Sameer', 300),
+(13,'Raj', 1500),
+(14,'Seeta', 1200);
+ 
+create table operations(
+	operationid int auto_increment primary key,
+    accountid int,
+    date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    amount DECIMAL(10,3) not null,
+    oper_type varchar(50) not null,
+    constraint fk_account_id foreign key (accountid) references accounts(accountid) on update cascade
+    on delete cascade );
+ 
+insert into operations(accountid, date_time, amount, oper_type) values
+(12, NOW(), 300, "Deposit"),
+(12, NOW(), 6000, "Withdrawl"),
+(13, NOW(), 6000, "Deposit");
+ 
+-- creating a store procedure spfundtransfer for baning:
+/* CREATE DEFINER=`root`@`localhost` PROCEDURE `spfundtransfer`(
+	IN sp_fromaccountid INT,
+    	IN sp_toaccountid INT,
+    	IN sp_amount DECIMAL(10,3)
+    )
+BEGIN
+	START TRANSACTION;
+    -- SELECT amount INTO accountid FROM accounts WHERE accountid = sp_accountid;
+
+    UPDATE accounts SET balance = balance + sp_amount
+    WHERE accountid = sp_toaccountid;
+    INSERT into operations(accountid, date_time, amount, oper_type)values
+    (sp_toaccountid, NOW(), sp_amount, 'D');
+
+
+    UPDATE accounts SET balance = balance - sp_amount
+    WHERE accountid = sp_fromaccountid;
+    INSERT into operations(accountid, date_time, amount, oper_type)values
+    (sp_fromaccountid, NOW(), sp_amount, 'W'); 
+    COMMIT;
+END */
+ 
+ 
+-- invoking  A STORED PROCEDURE
+ 
+CALL spfundtransfer(13,12 ,4000);

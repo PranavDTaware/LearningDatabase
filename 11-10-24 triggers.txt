@@ -1,0 +1,288 @@
+ 
+Trigger:
+	fire
+	Database:
+		 a trigger is a special type of stored procedure
+		 that is automatically executed or fired 
+		 in response to certain events or actions 
+		  occurring in the database.
+		What are those events ?
+		from which context ?----------------entity-----table
+			CRUD (data manipulation)Operations:
+			  INSERT----insert event
+						before insert----trigger--SP
+						after insert-----trigger--SP
+ 
+			  UPDATE----update event
+						before update------trigger--SP
+						after update-----trigger--SP
+ 
+			  DELETE 		
+						before delete------trigger--SP
+						after delete-----trigger--SP
+ 
+	
+	 Triggers  are used  to enforce business rules, 
+					maintaining data integrity,
+					automating tasks within database
+ 
+	 Triggers are used  to perform validation checks,
+				       audit checks
+				       propogating another execution cycles in respective related tables
+ 
+ 
+	Key Points about Triggers:
+			Event-Based Execution:
+			Timing: BEfore or After  (DATA Manipulation) ( Update, Insert, Delete)
+			Scope: table level scope:
+			Atomicity:
+ 
+ 
+	
+use HRDB:
+ 
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    department VARCHAR(100),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+ 
+ 
+-- create a trigger named update_last_updated that updates the last_updated column
+--  whenever a row is inserted or updated in the employees table
+DELIMITER //
+CREATE TRIGGER update_last_updated
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+SET NEW.last_updated = current_timestamp();
+END;
+//
+ 
+CREATE TRIGGER update_last_updated_on_update
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    SET NEW.last_updated = CURRENT_TIMESTAMP;
+END;
+//
+DELIMITER ;
+ 
+ 
+-- after   defining table   try to write  DML queries to test triggers are working
+-- as per expectation of buisiness logic
+ 
+-- Insert a new employee
+INSERT INTO employees (name, department) VALUES ('Ravi Tambade', 'training');
+ 
+-- Update existing record
+ 
+UPDATE  employees  SET department='BOD" WHERE id=1;
+ 
+SELECT * FROM employees;
+
+----------------------------------------------------------------------------------------------------------------
+
+
+-- eCommerce  Solution
+-- orders :  details about customer orders
+-- inventory : information about product stock
+-- Order processing System
+ 
+-- When an order is placed, the inventory is automatically  updated to
+-- reflect  new updated stock
+create database sample_ecommerce;
+use sample_ecommerce;
+ 
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    quantity INT,
+    order_date DATETIME,
+    status ENUM('pending', 'completed', 'canceled')
+);
+ 
+CREATE TABLE inventory (
+    product_id INT PRIMARY KEY,
+    stock_quantity INT
+);
+ 
+-- user story:
+-- When an order is placed, the inventory is automatically  updated to
+-- reflect  new updated stock
+ 
+DELIMITER $$
+CREATE TRIGGER after_order_insert
+AFTER  INSERT ON  orders
+FOR EACH ROW
+BEGIN
+	DECLARE available_stock INT;
+    SELECT stock_quantity INTO available_stock
+    FROM inventory
+    WHERE product_id = NEW.product_id;
+     IF available_stock IS NOT NULL AND available_stock >= NEW.quantity THEN
+		UPDATE  inventory
+		SET  stock_quantity=stock_quantity-NEW.quantity
+		WHERE  product_id=NEW.product_id;
+     ELSE
+		SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT= 'Insufficient stock for the product';
+     END IF;
+END $$
+DELIMITER ;
+ 
+ 
+-- Test trigger execution:
+ 
+-- pre-requisite
+INSERT INTO inventory (product_id,stock_quantity)
+values(	(1,56),
+		(2,78),
+		(5,00));
+-- Insert a new order
+INSERT INTO orders (product_id, quantity, order_date, status)
+Values (1, 3, NOW(), 'pending');
+
+
+
+
+
+
+ 
+1.Create Banking database.
+
+2.Create tables customers, accounts, operations
+
+	customers table
+
+	custid, fullname, registrationdate, balance;
+
+	accounts table
+
+	acctid, custid, accounttype (enum  current/ saving account),createdon , balance
+
+	operations table
+
+	operationid, accountid, amount, operationsdate, operationtype
+ 
+	Create table log with fields 
+
+		logid, timestamp, operationid, status ( completed)
+ 
+3.Create a trigger to register new customer in customers table.
+
+for registering customer with initial balance 15000.
+ 
+4.Create Stored procedure to deposite interest into Accounts table
+
+    in  accountid , interestrate
+
+	Check existing balance and update balance with caluclate interest based on interest set
+
+	 amount transfer entry to be added into operation with status "interest"
+ 
+5. Call stored procedure with accountid  and interest rate.
+ 
+Customer registration process
+ 
+	on customer insert trigger
+ 
+insert new customer details into customers
+
+insert new account entry into accounts table
+
+insert new operation entury into operations table.
+
+insert new  log entry into logs table
+ balance
+
+---------------------------------------------------------------------------------------------------------
+
+AJINKYA CODE
+
+/ customer insert trigger --
+insert new customer details into customers
+insert new account entry into accounts table
+insert new operation entury into operations table.
+insert new  log entry into logs table /
+
+
+
+DELIMITER $$
+
+CREATE TRIGGER after_insert_customers
+AFTER INSERT ON customers
+FOR EACH ROW
+BEGIN
+    DECLARE new_acctid INT;
+    DECLARE new_operationid INT;
+
+    INSERT INTO accounts (custid, accounttype, createdon, balance)
+    VALUES (NEW.custid, 'saving', NOW(), 15000.00);
+
+    SET new_acctid = LAST_INSERT_ID();
+
+    INSERT INTO operations (accountid, amount, operationsdate, operationtype)
+    VALUES (new_acctid, 15000.00, NOW(), 'deposit');
+
+    SET new_operationid = LAST_INSERT_ID();
+
+    INSERT INTO log (operationid, status)
+    VALUES (new_operationid, 'completed');
+
+  
+END$$
+
+DELIMITER ;
+
+INSERT INTO customers (fullname, registrationdate) VALUES
+('Abhi Nikam', '2023-09-11');
+
+SELECT * FROM customers WHERE fullname = 'Abhi Nikam';
+
+SELECT * FROM accounts WHERE custid = 7;
+
+SELECT * FROM operations WHERE accountid = 3;
+
+SELECT * FROM log WHERE operationid = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

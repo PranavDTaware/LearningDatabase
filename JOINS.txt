@@ -1,0 +1,175 @@
+
+
+Master table :- User
+		Categories
+		Shipping methods
+		discount_codes
+
+Dependent tables:- 
+
+products,
+orders,
+order_status,
+refunds,
+order_fulfillment,
+payments,
+inventory,
+purchase_orders,
+product_audit,
+order_discounts,
+price_changes,
+order_items,
+reviews,
+cart,
+cart_items,
+shipments,
+shipment_items,
+shipping_addresses,
+subscriptions,
+loyalty_redemptions,
+billing_adjustments,
+returns,
+
+
+
+
+
+
+
+
+
+What is  Join ?
+a join is an operation 
+that combines rows from one or more tables are based 
+a releated column between them  (PK--FK)
+ 
+joins are essential for retriveing data from multiple tables 
+in relational database.
+Different types of joins:
+
+
+INNER  JOIN
+Description:
+	Returns  only rows  that have matching values in both tables
+Use case:
+	When  you want to retriever recrods  that exist in both tables
+ 
+Example:
+	if you have a customers table and orders tables,
+	an INNERT join will return only customers who have placed orders
+
+----------------------------------------------------------------------------------------------------
+
+
+LEFT JOIN
+Description:
+	Returns all rows from the left table 
+	and the matched rows from the right table. 
+	If there’s no match, NULL values are returned for columns from the right table.
+ 
+use Case:
+	Useful when you want to see all records from one table 
+	the related records from another table, if they exist.
+	  Left					  right
+     Customers Table    ------ Orders Tables
+Example:
+	 List all customers and their orders,
+     including customers who have not placed any orders 
+     (they will show with NULL for order details).
+ 
+---------------------------------------------------------------------------------------------------
+
+
+RIGHT JOIN
+ 
+Description: Returns all rows from the right table
+			  and the matched rows from the left table.
+               If there’s no match, 
+               NULL values are returned for columns from the left table.
+Use Case:
+			Similar to LEFT JOIN, but it focuses on the right table.
+Example:
+			List all orders and the corresponding customers,
+			including orders that don’t have associated customers.
+ 
+Customers Table
+	CustomerID    	CustomerName   	     ContactName
+	1		John Doe		John
+	2		Jane Smith		Jane
+	3		Mike Johnson		Mike
+ 
+Orders Table
+	OrderID		CustomerID				OrderDate
+	101			1				2024-01-10
+	102			1				2024-01-15
+	103			2				2024-02-01
+    	104			4				2024-03-15
+ 
+"To retrieve all customers along with their orders (if any)"
+SELECT  Customers.CustomerID, Customers.CustomerName, Orders.OrderID, Orders.OrderDate
+FROM  Customers  
+LEFT JOIN  Orders ON  Customers.CustomerID = Orders.CustomerID;
+ 
+Output
+ 
+CustomerID		CustomerName		OrderID		OrderDate
+1			John Doe		101  		2024-01-10
+1			John Doe		102		2024-01-15
+2			Jane Smith      	103		2024-02-01
+3			Mike Johnson		NULL		NULL	
+ 
+RIGHT JOIN
+ 
+SELECT  Customers.CustomerID, Customers.CustomerName, Orders.OrderID, Orders.OrderDate
+FROM Customers
+RIGHT JOIN  ON Orders ON  Customers.CustomerID = Orders.CustomerID;
+ 
+Out put of RIGHT JOIN
+ 
+ 
+CustomerID		CustomerName		OrderID		OrderDate
+1			John Doe		101  		2024-01-10
+1			John Doe		102		2024-01-15
+2			Jane Smith      	103		2024-02-01
+NULL			NULL		    	104		2024-03-15	 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
