@@ -1,0 +1,35 @@
+Departments
+
+	deptid		deptname 	location
+
+	1		HR		Pune
+
+	2		Accounts	Mumbai
+
+	3		Sales		Delhi
+ 
+Employees
+
+	empid		name		salary		deptId
+
+	1		Sachin		36000		3
+
+	2		Sameera		25000		2
+
+	3		Rajan		35000		2
+
+	4		Chetana		25000		3
+
+	5		Abhi		56000		3
+ 
+ 
+	employees belong to sales department will get 10% salary hike due to sales target acheived
+ 
+	UPDATE Employees
+
+	JOIN Departments ON Employees.deptId =Departments.deptid
+
+	SET  emp.salary=emp.salary * (1.1) 
+
+	WHERE  dept.deptname == "Sales"
+ 
