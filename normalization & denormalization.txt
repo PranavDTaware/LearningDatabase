@@ -1,0 +1,115 @@
+ECommerce Solution:
+	Normalization :
+	is used to organize ecommerce datatabase 
+	to minimize redudency  and ensure data integrity:
+	identifying bussiness entities
+		products, customers, orders, payments, shipments,
+		etc.
+	identitying elements of entities:
+		products:
+	handle Ecommerce data:
+	product catalog related data:
+			products tables:brand, size, color,product image, category_id
+			categories table: category id, name, category_image
+			product details
+
+	customers relationship management related data:
+
+			customer credentials: username, password
+			customers  personalized information
+			customers addresses information
+			membership benifits
+			 name, addressess, payment method
+	order processing related data:
+			 orders table:
+			 orderid, order data, totalmount, customerid, statu
+			 orderdetails tables
+			 orderdetailid, productid, quantity
+
+ Advanteges of using Normalization:
+	 	Reduces data redundency
+		Enhances data integrity
+		simplifies  data management  and updates
+
+Denormalization :
+	ECommerce Solution:
+		to improve perfomance
+		Query: product search, view order history:
+		1.Combining tables:
+			combine product details page, category tables data
+			we can joins over required information.
+			fetch results fast: avoid joins
+
+		2.Storing Reduandnt data:
+			reports, dashboard
+			identify new tables for speeding up reporting, data retrival for 
+			frequently access information
+			
+		3.Precomputed Views:
+			Create denormalized views for analytics and reporting perspective 
+			 for aggregated data, total sales by category
+			
+		4.Caching Frequently Accessed Data:
+			Ecommerce Solution: peak time:
+					    Diwali festival, Navratri festival
+		Denormalizing data can also involve caching poplular product information
+		or user data to enhance performance during peak times,such as sales event
+
+	Advantages:
+		 1. Improves read perfomance and response times
+		 2. Simplifies complex queries for reporting.
+		 3. Reduces load on the database during high traffic
+
+----------------------------------------------------------------------------------------------------------------
+EXAMPLE :
+
+	Normalization in eCommerce:
+	
+	customers can place orders for products.
+	
+	1.Customers Table:
+			CustomerId(PK), Name, 		Email, 				Address
+				
+				1	Sachin Pande	sachin.pande@gmail.com		432 Pune Satara Road
+				2	Manisha Patil	manish.patil@gmail.com		543 D. P. Road
+
+	2.Products Table:
+			ProductId (PK), Name, 		Price, 	CategoryId(FK)
+			
+			321		HP Laptop	56000		2
+			341		DELL Desktop	45000		1
+
+	3.Catetory Table:
+			Category ID (PK),    CategoryName
+				1		Desktop
+				2		Laptop
+
+	4.Orders Table:
+			OrderId (PK), CustomerId (FK), OrderDate
+
+			301		1		2024-10-01
+			302		2		2024-10-02	
+
+	5.OrderDeatails Table:
+			OrderDetailId		OrderId		ProductId	Quantity
+			
+				1		 301		321		3
+				2		 302		321		6
+__________________________________________
+	Denormalization in eCommerce Solution:
+	
+	 to improve performance:
+	
+	1. Denormaized Order Table
+
+		OrderId		CustomerName	Email		Order_date 	Product	 	Quatity
+
+		301		Sachin Pande	sachin.pande	2024-10-01	HP Laptop 	3
+
+
+		Faster quries: This table allows quick access to order details without needing to join multiple tables.
+				ideal for high-traffic, 
+				order histroy
+			
+		Reports on customers orders can be generated without complex joins, 
+		Speeding up analytics processes.
