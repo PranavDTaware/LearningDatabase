@@ -1,0 +1,85 @@
+Database Automation  using  Event:
+
+database trigger:
+		  on insert,
+		  on update,
+		  on delete.----------------execute logic automatically
+		  some external stimulus is needed
+					due to insert or update, or delete
+
+Sheudling: is a process where one or more stored procedures could be set for exeuction on
+	   paticular time interval, at secific time,
+	   daily, weekly, monthly, annual basis
+
+Sheduler:
+	 Shedules tasks
+		task1  : Daily sales report generation
+		task2  : Daily update inventory level based on sales and return
+		task3  : Gentle reminder for unused shopping carts
+		task4  : Notify  customers about price drops on items , 
+			 they have viewed or added to their wishlist
+		
+	 mannully task is executed.
+	 task can be executed automatically
+
+
+DDL Commands:
+	Create database
+	Create procedure
+	Create view
+	Create trigger
+	Create index
+	Create table
+	Create function
+	Create event-------------
+	Create cursor
+
+Create event:
+
+steps to create and shedule  a stored procedure:
+
+
+1.Create the Stored Procedure
+	DELIMITER //
+	CREATE PROCEDURE my_procedure()
+	BEGIN
+		-- SQL commands here
+		INSERT INTO  products() values (,  ,  ,  , ); 
+	END //
+	DELIMITER;
+
+2.Enable the Event Scheduler
+	SHOW VARIABLES LIKE 'event_scheduler';
+	SET GLOBAL event_sheduler = ON;
+
+3.Create an Event to Schedule the stored procedure .
+	CREATE EVENT my_event
+	ON SCHEDULE EVERY 1 DAY
+	STARTS  '2024-10-19 00:00:00'
+	DO
+	CALL my_procedure()
+
+4.List all scheduled events.
+
+	SHOW EVENTS;
+
+5.Remove the event from event scheduler
+	DROP EVENT IF EXISTS my_event;
+
+
+	ECommerce Solution:
+	
+	 Business Scenarios and Use Cases:
+	 1.Daily Sales Report Generation
+	    Use Case:Automatically generate a summary report of daily sales.
+	    Stored Procedures:
+				Aggregate sales data
+				Calculate total revenue
+				Store it in a reporting table
+	    Event:Schedule the procedure to run every night at midnight.
+
+
+					
+	 2.Inventory Management
+	 3.Customer Reminders for Abandoned Carts
+	 4.Price Adjustment Alerts

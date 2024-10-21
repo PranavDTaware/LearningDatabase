@@ -1,0 +1,65 @@
+
+Database Cursor
+	1. cursor is used when there is a need to process some logic against 
+	   each record of table or result received from SELECT query
+	2. Cursor is used inside stored procedure,
+				 trigger
+	3. Cursor is a database object 
+		used to retrive, manipulate and navigate through resultset 
+		row by row.
+
+	4.is useful when you need to perform operations on individual row 
+	  returned by a query.
+	5.is used for updating or processing data sequentially.
+	
+	10% hike for each employee from November 2024
+
+	Transflower:
+	
+	Employees:
+	 id	name	 	salary
+	 34	Ravi		34000		
+	 36     Shubhangi	34000
+	 37	Manasi		35000
+
+ECommerce Solution:
+	databse : tflecommercedb
+		orders  : order_id, customer_id, total_amount
+		order_items:item_id, order_id, product_id, quantity, price
+
+	 Use Case:
+		   apply a discount to all orders that have a total amount greater than 100.
+		   you might want to update the order totals one by one ,using cursor.
+
+	DELIMITER $$
+	CREATE PROCEDURE apply_discount()
+	BEGIN
+	--Declare a cursor for selecting orders with total_amount >100
+	DECLARE order_cursor  CURSOR FOR
+	SELECT order_id, total_amount
+	FROM orders
+	WHERE total_amount >100
+
+	-- Delcare a continue handler to set done  to TRUE , when there are no more rows
+	DECLARE CONTINUE HANDLER  FOR  FOUND  SET done=TRUE;
+	
+	-- Open the cursor
+	OPEN order_cursor
+
+	-- Loop through the rows of curosor
+
+	read_loop:LOOP
+		FETCH order_cursor  INTO  order_id , total_amount;
+		IF done THEN
+		 LEAVE  read_loop;
+		END IF;
+
+		-- Apply a 10 % discount
+		UPDATE  orders
+		SET  total_amount=total_amount * 0.90;
+		WHERE order_id=order_id;
+	END LOOP;
+	CLOSE order_cursor;
+
+	END //
+	DELIMITER;
