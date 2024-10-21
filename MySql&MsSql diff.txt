@@ -1,0 +1,118 @@
+Databases:
+	 SQL Database Softwares
+		Oracle (database server), 
+		MySql (database server), 
+		MSSQL (Microsoft SQL)Server (database server)
+		Database
+			Tables
+				Recrods
+					record
+					id	name	email		location
+					1	raj	raj@gmail.com	Pune
+					2	sameer	sam@gmai.com	Mumbai
+					
+	 NoSQL Databases
+		Mongo DB (no sql database server)
+			Database
+				collections
+					documents
+						json structure
+						{ "id":45,
+						   "name":"Ravi Tambade",
+						   "email":"r.t@gmail.com"
+						}
+
+
+
+
+
+Differences in sytatical level in  MYSQL and SQL Server
+
+MySQL						SQl Server
+
+workbench					SSMS
+Open Source					proprietary product
+VARCAHR, TEXT, INT				XML, JSON
+ATUOINCREMENT					 IDENTITY(1,1)
+ENUM						 CHECK contstraint
+TIMESTAMP					 DateTime
+CALL						 EXEC
+IN, OUT						 @  OUTPUT  
+START TRANSACTION				 BEGIN TRANSACTION
+COMMIT						 COMMIT TRANSACTION
+ok						 high-performance
+NOW()						 GETDATE()
+
+
+MySQL  Stored procedure
+
+	DELIMITER //
+	CREATE PROCEDURE GetUserById(IN userId INT)
+	BEGIN
+	    SELECT * FROM users WHERE id = userId;
+	END //
+	DELIMITER ;
+
+SQL SERVER  Stored procedure
+
+	CREATE PROCEDURE GetUserById
+	    @userId INT
+	AS
+	BEGIN
+	    SELECT * FROM users WHERE id = @userId;
+	END;
+
+
+
+
+TRANSACTION in MySQL
+
+START TRANSACTION;
+	UPDATE users SET name = 'Alice Smith' WHERE id = 1;
+COMMIT;
+
+
+
+
+TRANSACTION in SQL Server
+
+BEGIN TRANSACTION;
+	UPDATE users SET name = 'Alice Smith' WHERE id = 1;
+COMMIT TRANSACTION;
+
+
+IN MYSQL: Concatenate string
+
+SELECT  CONCAT(fisrt_name ,' ' , last_name) as full_name FROM users;
+
+ 
+IN MSSQL: Concatenate string
+
+SELECT   fisrt_name  + ' ' + last_name as full_name FROM users;
+
+
+_________________________________
+
+
+Conditional Logic:
+
+case statement in mySQL
+
+
+SELECT name, 
+       CASE 
+           WHEN age < 18 THEN 'Minor' 
+           ELSE 'Adult' 
+       END AS age_group 
+FROM users;
+
+
+
+case statement in MSSQL
+
+SELECT name, 
+       CASE 
+           WHEN age < 18 THEN 'Minor' 
+           ELSE 'Adult' 
+       END AS age_group 
+FROM users;
